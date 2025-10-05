@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Silk Elegance</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+        <!-- Demo Website Banner -->
+<div class="demo-banner">
+    <div class="demo-banner-content">
+        <span class="demo-text">🚀 Demo Website - For live projects contact:</span>
+        <a href="https://www.nivratech.online" target="_blank" class="demo-link">www.nivratech.online</a>
+        <button class="demo-close" id="demo-close">×</button>
+    </div>
+</div>
+    <!-- Navigation (same as index.html) -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Silk Elegance</a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="gallery.html" class="nav-link active">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-icon wishlist-icon">
+                    <i class="fas fa-heart"></i>
+                </a>
+                <a href="#" class="nav-icon cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+<a href="#" class="nav-icon search-icon" id="search-toggle">
+    <i class="fas fa-search"></i>
+</a>            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+<!-- Add this search popup after the navigation -->
+<div class="search-popup" id="search-popup">
+    <div class="search-container">
+        <div class="search-header">
+            <h3>Search Sarees</h3>
+            <button class="search-close" id="search-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-input-group">
+            <input type="text" id="search-input" placeholder="Search for sarees, fabrics, designs..." autocomplete="off">
+            <button class="search-submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="search-suggestions">
+            <div class="suggestion-title">Popular Searches:</div>
+            <div class="suggestion-tags">
+                <span class="suggestion-tag" data-search="Banarasi Silk">Banarasi Silk</span>
+                <span class="suggestion-tag" data-search="Kanjivaram">Kanjivaram</span>
+                <span class="suggestion-tag" data-search="Chanderi Cotton">Chanderi Cotton</span>
+                <span class="suggestion-tag" data-search="Bridal Sarees">Bridal Sarees</span>
+                <span class="suggestion-tag" data-search="Designer Sarees">Designer Sarees</span>
+                <span class="suggestion-tag" data-search="Silk Sarees">Silk Sarees</span>
+            </div>
+        </div>
+        <div class="search-results" id="search-results">
+            <!-- Search results will appear here -->
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Customer Gallery</h1>
+            <p>See how our customers style their Silk Elegance sarees</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filters -->
+    <section class="gallery-filters">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="wedding">Wedding</button>
+                <button class="filter-tab" data-filter="festival">Festival</button>
+                <button class="filter-tab" data-filter="party">Party</button>
+                <button class="filter-tab" data-filter="traditional">Traditional</button>
+                <button class="filter-tab" data-filter="contemporary">Contemporary</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery">
+        <div class="container">
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="wedding">
+                    <div class="gallery-image">
+                        <img src="https://www.studio149fashion.com/cdn/shop/files/Untitled_design_27_756c12f1-c553-4954-811f-6ba8e203c8fe.png?v=1721111394"
+                            alt="Bridal Saree">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Anjali's Wedding</h3>
+                                <p>Traditional red Banarasi silk</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="festival">
+                    <div class="gallery-image">
+                        <img src="https://assets2.andaazfashion.com/media/catalog/product/f/e/festival-wear-pale-pink-net-embroidered-saree-sarv161209-1.jpg"
+                            alt="Festival Saree">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Diwali Celebration</h3>
+                                <p>Embroidered silk saree in gold</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="party">
+                    <div class="gallery-image">
+                        <img src="https://www.heenastyle.com/image/cache/catalog/9888-RT5853/FHRT5853165060-610x1050.jpg"
+                            alt="Party Saree">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>New Year Party</h3>
+                                <p>Sequinned georgette saree</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="traditional">
+                    <div class="gallery-image">
+                        <img src="https://cdn.sareeka.com/image/cache/data2024/meenakari-and-woven-work-silk-traditional-saree-in-beige-296685-1000x1375.jpg"
+                            alt="Traditional Saree">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Family Function</h3>
+                                <p>South silk with zari border</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="contemporary">
+                    <div class="gallery-image">
+                        <img src="https://assets0.mirraw.com/images/12874576/image_zoom.jpeg?1727864740"
+                            alt="Contemporary Saree">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Office Event</h3>
+                                <p>Modern printed cotton saree</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="wedding">
+                    <div class="gallery-image">
+                        <img src="https://cdn.shopify.com/s/files/1/0625/7550/9710/files/Hand_embroidered_Saree_480x480.webp?v=1732775884"
+                            alt="Wedding Guest">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Wedding Guest</h3>
+                                <p>Pastel silk with intricate embroidery</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="festival">
+                    <div class="gallery-image">
+                        <img src="https://i.pinimg.com/736x/87/6a/ee/876aee3a404d0b6953ddf52c4bd56892.jpg"
+                            alt="Festival Wear">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Navratri Celebration</h3>
+                                <p>Vibrant Bandhani print saree</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="traditional">
+                    <div class="gallery-image">
+                        <img src="https://soojidaara.in/cdn/shop/articles/Nauvari_Silk_Sarees_Maharashtrian.jpg?v=1722579243"
+                            alt="Traditional Wear">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Temple Visit</h3>
+                                <p>Simple cotton with traditional motifs</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="bridal">
+                    <div class="gallery-image">
+                        <img src="https://assets2.andaazfashion.com/media/catalog/product/d/a/dark-pink-net-embroidered-bridal-wear-lehenga-llcv113675-1.jpg"
+                            alt="Bridal Wear">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Bridal Wear</h3>
+                                <p>Dark pink net embroidered lehenga</p>
+                                <button class="btn-view">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <div class="testimonial-content">
+                        <p>"The quality of the silk is exceptional and the craftsmanship is evident in every detail. I
+                            received so many compliments at my sister's wedding!"</p>
+                        <div class="testimonial-author">
+                            <!-- <img src="images/customer1.jpg" alt="Priya Mehta"> -->
+                            <img src="https://images.unsplash.com/flagged/photo-1559289142-e88aab8191d7?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Priya Mehta">
+
+                            <div class="author-info">
+                                <h4>Priya Mehta</h4>
+                                <p>Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"As someone new to wearing sarees, the team at Silk Elegance was incredibly helpful in
+                            guiding me to the perfect style for my body type."</p>
+                        <div class="testimonial-author">
+                            <!-- <img src="images/customer2.jpg" alt="Neha Sharma"> -->
+                            <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Neha Sharma">
+                            <div class="author-info">
+                                <h4>Neha Sharma</h4>
+                                <p>Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"The customization options allowed me to create a truly unique saree for my daughter's
+                            wedding. The attention to detail was remarkable."</p>
+                        <div class="testimonial-author">
+                            <!-- <img src="images/customer3.jpg" alt="Rekha Patel"> -->
+                            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                alt="Rekha Patel">
+                            <div class="author-info">
+                                <h4>Rekha Patel</h4>
+                                <p>Ahmedabad</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="testimonial-btn next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Your Look CTA -->
+    <section class="share-look">
+        <div class="container">
+            <div class="share-content">
+                <h2>Share Your Silk Elegance Look</h2>
+                <p>Tag us on Instagram with #SilkElegance for a chance to be featured in our gallery</p>
+                <a href="https://www.instagram.com/nivratech_official" target="_blank" class="btn"><i class="fab fa-instagram"></i> Follow @nivratech_official</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Silk Elegance</h3>
+                    <p>Bringing you the finest collection of traditional and contemporary sarees since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Mumbai</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@silkelegance.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Silk Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-image">
+                <img src="" alt="" id="modal-img">
+            </div>
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+      <script>
+        // Navigation functionality
+function initializeNavigation() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+    
+    // Sticky navigation on scroll
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        }
+    });
+}
+    </script>
+</body>
+
+</html>

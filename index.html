@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silk Elegance | Premium Sarees</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Demo Website Banner -->
+<div class="demo-banner">
+    <div class="demo-banner-content">
+        <span class="demo-text">🚀 Demo Website - For live projects contact:</span>
+        <a href="https://www.nivratech.online" target="_blank" class="demo-link">www.nivratech.online</a>
+        <button class="demo-close" id="demo-close">×</button>
+    </div>
+</div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Silk Elegance</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="shop.html" class="nav-link">Shop</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="#" class="nav-icon wishlist-icon">
+    <i class="fas fa-heart"></i>
+</a>
+                <a href="#" class="nav-icon cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </a> 
+<a href="#" class="nav-icon search-icon" id="search-toggle">
+    <i class="fas fa-search"></i>
+</a>            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Add this search popup after the navigation -->
+<div class="search-popup" id="search-popup">
+    <div class="search-container">
+        <div class="search-header">
+            <h3>Search Sarees</h3>
+            <button class="search-close" id="search-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-input-group">
+            <input type="text" id="search-input" placeholder="Search for sarees, fabrics, designs..." autocomplete="off">
+            <button class="search-submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="search-suggestions">
+            <div class="suggestion-title">Popular Searches:</div>
+            <div class="suggestion-tags">
+                <span class="suggestion-tag" data-search="Banarasi Silk">Banarasi Silk</span>
+                <span class="suggestion-tag" data-search="Kanjivaram">Kanjivaram</span>
+                <span class="suggestion-tag" data-search="Chanderi Cotton">Chanderi Cotton</span>
+                <span class="suggestion-tag" data-search="Bridal Sarees">Bridal Sarees</span>
+                <span class="suggestion-tag" data-search="Designer Sarees">Designer Sarees</span>
+                <span class="suggestion-tag" data-search="Silk Sarees">Silk Sarees</span>
+            </div>
+        </div>
+        <div class="search-results" id="search-results">
+            <!-- Search results will appear here -->
+        </div>
+    </div>
+</div>
+
+    <!-- Hero Section with Slider -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h1>Elegance Woven in Silk</h1>
+                    <p>Discover our exclusive collection of handcrafted sarees</p>
+                    <a href="shop.html" class="btn">Shop Now</a>
+                </div>
+                <div class="slide-image">
+                    <!-- <img src="images/hero1.jpg" alt="Traditional Silk Saree"> -->
+                    <img src="https://images.unsplash.com/photo-1742287721821-ddf522b3f37b?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80"
+                        alt="Traditional Silk Saree">
+
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>Modern Designs, Timeless Beauty</h1>
+                    <p>Contemporary sarees for the modern woman</p>
+                    <a href="shop.html" class="btn">Explore Collection</a>
+                </div>
+                <div class="slide-image">
+                    <!-- <img src="images/hero2.jpg" alt="Contemporary Saree"> -->
+                    <img src="https://cdn.sareeka.com/image/cache/data2024/meenakari-and-woven-work-silk-traditional-saree-in-beige-296685-1000x1375.jpg"
+                        alt="Contemporary Saree">
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>Wedding Collection</h1>
+                    <p>Exquisite bridal sarees for your special day</p>
+                    <a href="shop.html" class="btn">View Collection</a>
+                </div>
+                <div class="slide-image">
+                    <!-- <img src="images/hero3.jpg" alt="Bridal Saree"> -->
+                    <img src="https://soojidaara.in/cdn/shop/articles/Nauvari_Silk_Sarees_Maharashtrian.jpg?v=1722579243"
+                        alt="Bridal Saree">
+                </div>
+            </div>
+
+        </div>
+        <div class="slider-controls">
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <!-- <img src="images/saree1.jpg" alt="Silk Sarees"> -->
+                        <img src="https://images.unsplash.com/photo-1742287724816-4a8a1cc7ad5c?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                            alt="Silk Sarees">
+                    </div>
+                    <h3>Silk Sarees</h3>
+                    <a href="shop.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <!-- <img src="images/saree2.jpg" alt="Cotton Sarees"> -->
+                        <img src="https://images.unsplash.com/photo-1694243382333-9e3244d9ba04?q=80&w=733&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                            alt="Cotton Sarees">
+                    </div>
+                    <h3>Cotton Sarees</h3>
+                    <a href="shop.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <!-- <img src="images/saree3.jpg" alt="Designer Sarees"> -->
+                        <img src="https://zardozipune.com/wp-content/uploads/2024/04/A-31-scaled.jpg"
+                            alt="Designer Sarees">
+                    </div>
+                    <h3>Designer Sarees</h3>
+                    <a href="shop.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="category-card">
+                    <div class="category-img">
+                        <!-- <img src="images/saree4.jpg" alt="Bridal Sarees"> -->
+                        <img src="https://soojidaara.in/cdn/shop/articles/Nauvari_Silk_Sarees_Maharashtrian.jpg?v=1722579243"
+                            alt="Bridal Sarees">
+                    </div>
+                    <h3>Bridal Sarees</h3>
+                    <a href="shop.html" class="category-link">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured">
+        <div class="container">
+            <h2 class="section-title">Featured Sarees</h2>
+            <div class="product-grid">
+                <!-- Product cards will be populated by JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="shop.html" class="btn btn-outline">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Style Quiz CTA -->
+    <section class="quiz-cta">
+        <div class="container">
+            <div class="quiz-content">
+                <h2>Find Your Perfect Saree Style</h2>
+                <p>Take our quick style quiz to discover sarees that match your personality and preferences</p>
+                <button class="btn" id="quiz-btn">Take Style Quiz</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Silk Elegance</h3>
+                    <p>Bringing you the finest collection of traditional and contemporary sarees since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Mumbai</li>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> info@silkelegance.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Silk Elegance. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Style Quiz Modal -->
+    <div class="modal" id="quiz-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="quiz-container">
+                <h2>Find Your Saree Style</h2>
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <span class="progress-text">Question <span id="current-question">1</span> of 5</span>
+                </div>
+                <div class="quiz-questions">
+                    <!-- Questions will be populated by JavaScript -->
+                </div>
+                <div class="quiz-nav">
+                    <button class="btn btn-outline" id="prev-btn" disabled>Previous</button>
+                    <button class="btn" id="next-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile Navigation Functionality
+class MobileNavigation {
+    constructor() {
+        this.hamburger = document.getElementById('hamburger');
+        this.navMenu = document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        this.navIcons = document.querySelectorAll('.nav-icon');
+        
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        // Hamburger click
+        if (this.hamburger) {
+            this.hamburger.addEventListener('click', () => {
+                this.toggleMenu();
+            });
+        }
+
+        // Close menu when clicking on links
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMenu();
+            });
+        });
+
+        // Close menu when clicking on icons (except search)
+        this.navIcons.forEach(icon => {
+            if (!icon.classList.contains('search-icon')) {
+                icon.addEventListener('click', () => {
+                    this.closeMenu();
+                });
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.navMenu.classList.contains('active') && 
+                !this.navMenu.contains(e.target) && 
+                !this.hamburger.contains(e.target)) {
+                this.closeMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
+                this.closeMenu();
+            }
+        });
+
+        // Close menu on window resize (if resizing to larger screen)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMenu();
+            }
+        });
+    }
+
+    toggleMenu() {
+        this.hamburger.classList.toggle('active');
+        this.navMenu.classList.toggle('active');
+        
+        // Prevent body scroll when menu is open
+        if (this.navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+
+    closeMenu() {
+        this.hamburger.classList.remove('active');
+        this.navMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    openMenu() {
+        this.hamburger.classList.add('active');
+        this.navMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Update your existing navigation initialization
+function initializeNavigation() {
+    // Initialize mobile navigation
+    window.mobileNav = new MobileNavigation();
+    
+    // Your existing sticky navigation code
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        }
+    });
+}
+    </script>
+</body>
+
+</html>
