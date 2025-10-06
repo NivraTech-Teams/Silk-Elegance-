@@ -1912,3 +1912,180 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Initialize product grid on shop page
+function initializeProductGrid() {
+    const productGrid = document.getElementById('product-grid');
+    
+    if (!productGrid) return;
+    
+    // RELIABLE product data with working HTTPS images
+    const products = [
+        { 
+            id: 1, 
+            name: 'Banarasi Silk Saree', 
+            price: '₹8,999', 
+            category: 'silk', 
+            image: 'https://images.unsplash.com/photo-1585487000113-679b4c1d2d28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 2, 
+            name: 'Kanjivaram Silk', 
+            price: '₹12,499', 
+            category: 'silk', 
+            image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 3, 
+            name: 'Chanderi Cotton Saree', 
+            price: '₹4,999', 
+            category: 'cotton', 
+            image: 'https://images.unsplash.com/photo-1631148557880-e003a16bf70d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 4, 
+            name: 'Designer Georgette', 
+            price: '₹6,499', 
+            category: 'designer', 
+            image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 5, 
+            name: 'Bridal Silk Saree', 
+            price: '₹15,999', 
+            category: 'bridal', 
+            image: 'https://images.unsplash.com/photo-1585487000113-679b4c1d2d28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 6, 
+            name: 'Printed Cotton Saree', 
+            price: '₹3,499', 
+            category: 'cotton', 
+            image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 7, 
+            name: 'Embroidered Silk', 
+            price: '₹9,999', 
+            category: 'silk', 
+            image: 'https://images.unsplash.com/photo-1631148557880-e003a16bf70d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 8, 
+            name: 'Party Wear Saree', 
+            price: '₹7,499', 
+            category: 'designer', 
+            image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 9, 
+            name: 'Traditional Silk', 
+            price: '₹11,999', 
+            category: 'silk', 
+            image: 'https://images.unsplash.com/photo-1585487000113-679b4c1d2d28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 10, 
+            name: 'Casual Cotton Saree', 
+            price: '₹2,999', 
+            category: 'cotton', 
+            image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 11, 
+            name: 'Festive Silk Saree', 
+            price: '₹13,499', 
+            category: 'bridal', 
+            image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        },
+        { 
+            id: 12, 
+            name: 'Lightweight Georgette', 
+            price: '₹5,499', 
+            category: 'designer', 
+            image: 'https://images.unsplash.com/photo-1631148557880-e003a16bf70d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80' 
+        }
+    ];
+    
+    // Render products
+    renderProducts(products);
+    
+    // Function to render products
+    function renderProducts(productsToRender) {
+        productGrid.innerHTML = '';
+        
+        productsToRender.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.className = 'product-card';
+            
+            productCard.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}" loading="lazy">
+                    <button class="wishlist-btn" data-id="${product.id}">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="product-info">
+                    <h3>${product.name}</h3>
+                    <div class="product-price">${product.price}</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
+                        <button class="wishlist" data-id="${product.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            productGrid.appendChild(productCard);
+        });
+        
+        // Add image error handling
+        setupImageErrorHandling();
+        
+        // Add event listeners for wishlist buttons in product image
+        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+        wishlistBtns.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                if (window.sareeWishlist) {
+                    // Find the corresponding wishlist button in product actions
+                    const actionWishlistBtn = this.closest('.product-card').querySelector('.product-actions .wishlist');
+                    window.sareeWishlist.toggleWishlist(productId, actionWishlistBtn);
+                }
+            });
+        });
+    }
+    
+    // Image error handling function
+    function setupImageErrorHandling() {
+        const images = document.querySelectorAll('.product-image img');
+        images.forEach(img => {
+            img.addEventListener('error', function() {
+                // Replace broken image with a placeholder
+                this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDUwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiBmaWxsPSIjRjBGMEYwIi8+CjxwYXRoIGQ9Ik0yMDAgMjAwTDMwMCAzMDAiIHN0cm9rZT0iI0Q4RDhEOCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0zMDAgMjAwTDIwMCAzMDAiIHN0cm9rZT0iI0Q4RDhEOCIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjx0ZXh0IHg9IjI1MCIgeT0iMzcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM5OTk5OTkiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4K';
+                this.alt = 'Image not available';
+            });
+            
+            // Add loading animation
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            
+            img.style.opacity = '0';
+            img.style.transition = 'opacity 0.3s ease';
+        });
+    }
+}
+
