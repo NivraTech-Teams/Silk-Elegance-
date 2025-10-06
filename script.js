@@ -13,6 +13,10 @@ function initializeWebsite() {
     // Common functionality for all pages
     initializeNavigation();
     initializeFooter();
+    initializeDemoBanner();
+    
+    // Initialize core features
+    initializeCoreFeatures();
     
     // Page-specific initialization
     switch(currentPage) {
@@ -32,36 +36,128 @@ function initializeWebsite() {
     }
 }
 
-// Navigation functionality
-function initializeNavigation() {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
+// Initialize core features
+function initializeCoreFeatures() {
+    // Initialize shopping cart
+    window.sareeCart = new ShoppingCart();
     
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
+    // Initialize wishlist
+    window.sareeWishlist = new Wishlist();
+    
+    // Initialize search
+    window.sareeSearch = new Search();
+}
+
+// Mobile Navigation Functionality
+class MobileNavigation {
+    constructor() {
+        this.hamburger = document.getElementById('hamburger');
+        this.navMenu = document.getElementById('nav-menu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        this.navIcons = document.querySelectorAll('.nav-icon');
         
-        // Close mobile menu when clicking on a link
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+        this.init();
+    }
+
+    init() {
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        // Hamburger click
+        if (this.hamburger) {
+            this.hamburger.addEventListener('click', () => {
+                this.toggleMenu();
+            });
+        }
+
+        // Close menu when clicking on links
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                this.closeMenu();
             });
         });
+
+        // Close menu when clicking on icons (except search)
+        this.navIcons.forEach(icon => {
+            if (!icon.classList.contains('search-icon')) {
+                icon.addEventListener('click', () => {
+                    this.closeMenu();
+                });
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (this.navMenu && this.navMenu.classList.contains('active') && 
+                !this.navMenu.contains(e.target) && 
+                this.hamburger && !this.hamburger.contains(e.target)) {
+                this.closeMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.navMenu && this.navMenu.classList.contains('active')) {
+                this.closeMenu();
+            }
+        });
+
+        // Close menu on window resize (if resizing to larger screen)
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMenu();
+            }
+        });
     }
+
+    toggleMenu() {
+        if (this.hamburger && this.navMenu) {
+            this.hamburger.classList.toggle('active');
+            this.navMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (this.navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+    }
+
+    closeMenu() {
+        if (this.hamburger && this.navMenu) {
+            this.hamburger.classList.remove('active');
+            this.navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    openMenu() {
+        if (this.hamburger && this.navMenu) {
+            this.hamburger.classList.add('active');
+            this.navMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+}
+
+// Navigation functionality
+function initializeNavigation() {
+    // Initialize mobile navigation
+    window.mobileNav = new MobileNavigation();
     
     // Sticky navigation on scroll
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
         }
     });
 }
@@ -73,6 +169,26 @@ function initializeFooter() {
     if (copyrightElement) {
         const currentYear = new Date().getFullYear();
         copyrightElement.innerHTML = `&copy; ${currentYear} Silk Elegance. All rights reserved.`;
+    }
+}
+
+// Demo Banner Close Functionality
+function initializeDemoBanner() {
+    const demoBanner = document.querySelector('.demo-banner');
+    const closeBtn = document.getElementById('demo-close');
+    
+    if (closeBtn && demoBanner) {
+        closeBtn.addEventListener('click', function() {
+            demoBanner.style.display = 'none';
+            // Adjust other elements after banner is closed
+            const navbar = document.querySelector('.navbar');
+            const pageHeader = document.querySelector('.page-header');
+            const hero = document.querySelector('.hero');
+            
+            if (navbar) navbar.style.top = '0';
+            if (pageHeader) pageHeader.style.marginTop = '70px';
+            if (hero) hero.style.marginTop = '70px';
+        });
     }
 }
 
@@ -186,86 +302,16 @@ function initializeFeaturedProducts() {
             id: 5,
             name: 'Bridal Silk Saree',
             price: '₹15,999',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1TY12R3eNbjaiNFajVO3kjEW076mE67hciw&s',
+            image: 'https://images.indianweddingsaree.com/product-image/1973230/1.jpg',
             badge: 'Bestseller'
         },
-
         {
             id: 6,
             name: 'Printed Cotton Saree',
             price: '₹3,499',
-            image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYDnjgIsK8zxU83pxjNwZ7OLw-16l4O-PTRA&s',
+            image: 'https://jaipurtex.com/cdn/shop/files/001A0041.webp?v=1717072432&width=1946',
             badge: ''
-
         }
-         
-    ];
-    
-    // Generate product cards
-    featuredProducts.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        
-        productCard.innerHTML = `
-            <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
-                ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
-            </div>
-               <!-- Quick wishlist button in image -->
-        <button class="wishlist-btn" data-id="1">
-            <i class="far fa-heart"></i>
-        </button>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <div class="product-price">${product.price}</div>
-               <div class="product-actions">
-    <button class="add-to-cart" data-id="1">Add to Cart</button>
-   <button class="wishlist" data-id="1">
-                <i class="far fa-heart"></i>
-            </button></div>
-            </div>
-        `;
-        
-        productGrid.appendChild(productCard);
-    });
-    
-    // Add to cart functionality
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-            addToCart(productId);
-        });
-    });
-
-
-
-    
-
-// Initialize wishlist when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    window.sareeWishlist = new Wishlist();
-    
-    // Your existing initialization code
-    initializeWebsite();
-});
-
-// Update product cards initialization to include wishlist data attributes
-function initializeFeaturedProducts() {
-    const productGrid = document.querySelector('.featured .product-grid');
-    
-    if (!productGrid) return;
-    
-    // Sample product data
-    const featuredProducts = [
-        {
-            id: 1,
-            name: 'Banarasi Silk Saree',
-            price: '₹8,999',
-            image: 'https://images.unsplash.com/photo-1585487000113-679b4c1d2d28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-            badge: 'Bestseller'
-        },
-        // ... other products
     ];
     
     // Generate product cards with wishlist buttons
@@ -296,10 +342,7 @@ function initializeFeaturedProducts() {
         productGrid.appendChild(productCard);
     });
     
-    // Add event listeners
-    // ... existing cart event listeners
-    
-    // Wishlist button in product image
+    // Add event listeners for wishlist buttons in product image
     const wishlistBtns = document.querySelectorAll('.wishlist-btn');
     wishlistBtns.forEach(button => {
         button.addEventListener('click', function() {
@@ -312,15 +355,12 @@ function initializeFeaturedProducts() {
         });
     });
 }
-    
-}
-
 
 // Style Quiz functionality
 function initializeStyleQuiz() {
     const quizBtn = document.getElementById('quiz-btn');
     const quizModal = document.getElementById('quiz-modal');
-    const closeModal = document.querySelector('.close');
+    const closeModal = quizModal ? quizModal.querySelector('.close') : null;
     const nextBtn = document.getElementById('next-btn');
     const prevBtn = document.getElementById('prev-btn');
     const currentQuestionEl = document.getElementById('current-question');
@@ -431,19 +471,25 @@ function initializeStyleQuiz() {
         const questionData = quizData[index];
         
         // Update progress
-        currentQuestionEl.textContent = index + 1;
-        const progressPercentage = ((index + 1) / quizData.length) * 100;
-        progressBar.style.width = `${progressPercentage}%`;
+        if (currentQuestionEl) currentQuestionEl.textContent = index + 1;
+        if (progressBar) {
+            const progressPercentage = ((index + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
         
         // Update button text for last question
-        if (index === quizData.length - 1) {
-            nextBtn.textContent = 'See Results';
-        } else {
-            nextBtn.textContent = 'Next';
+        if (nextBtn) {
+            if (index === quizData.length - 1) {
+                nextBtn.textContent = 'See Results';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
         }
         
         // Enable/disable previous button
-        prevBtn.disabled = index === 0;
+        if (prevBtn) {
+            prevBtn.disabled = index === 0;
+        }
         
         // Generate question HTML
         let questionHTML = `
@@ -466,7 +512,9 @@ function initializeStyleQuiz() {
             </div>
         `;
         
-        quizQuestions.innerHTML = questionHTML;
+        if (quizQuestions) {
+            quizQuestions.innerHTML = questionHTML;
+        }
         
         // Add event listeners to options
         const options = document.querySelectorAll('.quiz-option');
@@ -482,12 +530,12 @@ function initializeStyleQuiz() {
                 userAnswers[index] = this.getAttribute('data-value');
                 
                 // Enable next button
-                nextBtn.disabled = false;
+                if (nextBtn) nextBtn.disabled = false;
             });
         });
         
         // Enable next button if user has already selected an option
-        nextBtn.disabled = !userAnswers[index];
+        if (nextBtn) nextBtn.disabled = !userAnswers[index];
     }
     
     // Show quiz results
@@ -496,27 +544,29 @@ function initializeStyleQuiz() {
         const result = calculateQuizResult(userAnswers);
         
         // Display results
-        quizQuestions.innerHTML = `
-            <div class="quiz-results">
-                <h3>Your Perfect Saree Style</h3>
-                <div class="result-image">
-                    <img src="${result.image}" alt="${result.style}">
+        if (quizQuestions) {
+            quizQuestions.innerHTML = `
+                <div class="quiz-results">
+                    <h3>Your Perfect Saree Style</h3>
+                    <div class="result-image">
+                        <img src="${result.image}" alt="${result.style}">
+                    </div>
+                    <h4>${result.style}</h4>
+                    <p>${result.description}</p>
+                    <div class="result-actions">
+                        <a href="shop.html" class="btn">Shop Similar Sarees</a>
+                    </div>
                 </div>
-                <h4>${result.style}</h4>
-                <p>${result.description}</p>
-                <div class="result-actions">
-                    <a href="shop.html" class="btn">Shop Similar Sarees</a>
-                </div>
-            </div>
-        `;
+            `;
+        }
         
         // Hide navigation buttons
-        document.querySelector('.quiz-nav').style.display = 'none';
+        const quizNav = document.querySelector('.quiz-nav');
+        if (quizNav) quizNav.style.display = 'none';
     }
     
     // Calculate quiz result (simplified)
     function calculateQuizResult(answers) {
-        // This is a simplified calculation - in a real app, this would be more sophisticated
         const results = [
             {
                 style: "Royal Banarasi",
@@ -531,12 +581,12 @@ function initializeStyleQuiz() {
             {
                 style: "Contemporary Chic",
                 description: "You love modern designs that blend tradition with contemporary aesthetics.",
-                image: "images/saree7.jpg"
+                image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             },
             {
                 style: "Light & Airy",
                 description: "You prefer comfortable, flowy sarees perfect for casual wear and parties.",
-                image: "images/saree8.jpg"
+                image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             }
         ];
         
@@ -597,32 +647,6 @@ function initializeProductGrid() {
     // Render products
     renderProducts(products);
     
-    // Add to cart functionality
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const productId = this.getAttribute('data-id');
-            addToCart(productId);
-        });
-    });
-    
-    // Wishlist functionality
-    const wishlistButtons = document.querySelectorAll('.wishlist');
-    wishlistButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                this.style.color = '#e74c3c';
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                this.style.color = '';
-            }
-        });
-    });
-    
     // Function to render products
     function renderProducts(productsToRender) {
         productGrid.innerHTML = '';
@@ -634,18 +658,36 @@ function initializeProductGrid() {
             productCard.innerHTML = `
                 <div class="product-image">
                     <img src="${product.image}" alt="${product.name}">
+                    <button class="wishlist-btn" data-id="${product.id}">
+                        <i class="far fa-heart"></i>
+                    </button>
                 </div>
                 <div class="product-info">
                     <h3>${product.name}</h3>
                     <div class="product-price">${product.price}</div>
                     <div class="product-actions">
                         <button class="add-to-cart" data-id="${product.id}">Add to Cart</button>
-                        <button class="wishlist"><i class="far fa-heart"></i></button>
+                        <button class="wishlist" data-id="${product.id}">
+                            <i class="far fa-heart"></i>
+                        </button>
                     </div>
                 </div>
             `;
             
             productGrid.appendChild(productCard);
+        });
+        
+        // Add event listeners for wishlist buttons in product image
+        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+        wishlistBtns.forEach(button => {
+            button.addEventListener('click', function() {
+                const productId = this.getAttribute('data-id');
+                if (window.sareeWishlist) {
+                    // Find the corresponding wishlist button in product actions
+                    const actionWishlistBtn = this.closest('.product-card').querySelector('.product-actions .wishlist');
+                    window.sareeWishlist.toggleWishlist(productId, actionWishlistBtn);
+                }
+            });
         });
     }
 }
@@ -669,13 +711,10 @@ function initializeFilters() {
     }
     
     function filterProducts() {
-        // In a real application, this would filter products based on selected criteria
-        // For this demo, we'll just show a message
         console.log('Filters applied');
     }
     
     function sortProducts() {
-        // In a real application, this would sort products based on selected criteria
         console.log('Products sorted');
     }
 }
@@ -692,7 +731,6 @@ function initializePagination() {
             // Add active class to clicked button
             this.classList.add('active');
             
-            // In a real application, this would load the corresponding page of products
             console.log('Page changed');
         });
     });
@@ -788,15 +826,17 @@ function initializeImageModal() {
     viewButtons.forEach(button => {
         button.addEventListener('click', function() {
             const galleryItem = this.closest('.gallery-item');
-            const imageSrc = galleryItem.querySelector('img').src;
-            const title = galleryItem.querySelector('h3').textContent;
-            const description = galleryItem.querySelector('p').textContent;
-            
-            modalImg.src = imageSrc;
-            modalTitle.textContent = title;
-            modalDesc.textContent = description;
-            
-            modal.style.display = 'block';
+            if (galleryItem) {
+                const imageSrc = galleryItem.querySelector('img').src;
+                const title = galleryItem.querySelector('h3').textContent;
+                const description = galleryItem.querySelector('p').textContent;
+                
+                if (modalImg) modalImg.src = imageSrc;
+                if (modalTitle) modalTitle.textContent = title;
+                if (modalDesc) modalDesc.textContent = description;
+                
+                modal.style.display = 'block';
+            }
         });
     });
     
@@ -846,26 +886,6 @@ function initializeContactForm() {
         contactForm.reset();
     });
 }
-
-// // Add to cart functionality (placeholder)
-// function addToCart(productId) {
-//     // In a real application, this would add the product to a shopping cart
-//     // For this demo, we'll just show a confirmation message
-//     alert('Product added to cart!');
-    
-//     // You could also update a cart counter in the navigation
-//     const cartIcon = document.querySelector('.nav-icon .fa-shopping-cart');
-//     if (cartIcon) {
-//         // Animate the cart icon
-//         cartIcon.style.transform = 'scale(1.2)';
-//         setTimeout(() => {
-//             cartIcon.style.transform = 'scale(1)';
-//         }, 300);
-//     }
-// }
-
-
-
 
 // Shopping Cart Functionality
 class ShoppingCart {
@@ -1161,14 +1181,14 @@ class ShoppingCart {
         
         if (this.cart.length === 0) {
             cartItemsContainer.style.display = 'none';
-            cartSummary.style.display = 'none';
-            emptyCartMessage.style.display = 'block';
+            if (cartSummary) cartSummary.style.display = 'none';
+            if (emptyCartMessage) emptyCartMessage.style.display = 'block';
             return;
         }
         
         cartItemsContainer.style.display = 'block';
-        cartSummary.style.display = 'block';
-        emptyCartMessage.style.display = 'none';
+        if (cartSummary) cartSummary.style.display = 'block';
+        if (emptyCartMessage) emptyCartMessage.style.display = 'none';
         
         cartItemsContainer.innerHTML = '';
         
@@ -1198,8 +1218,10 @@ class ShoppingCart {
         });
         
         // Update total price
-        document.getElementById('cart-total-price').textContent = 
-            this.calculateTotal().toLocaleString();
+        const totalPriceElement = document.getElementById('cart-total-price');
+        if (totalPriceElement) {
+            totalPriceElement.textContent = this.calculateTotal().toLocaleString();
+        }
         
         // Add event listeners for quantity controls and remove buttons
         this.setupCartItemEvents();
@@ -1269,40 +1291,6 @@ class ShoppingCart {
         this.renderCartItems();
     }
 }
-
-// Initialize shopping cart when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    window.sareeCart = new ShoppingCart();
-    
-    // Your existing initialization code
-    initializeWebsite();
-});
-
-// Update the existing addToCart function to use the new cart system
-function addToCart(productId) {
-    if (window.sareeCart) {
-        window.sareeCart.addToCart(productId);
-    }
-}
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
 
 // Wishlist Functionality (Cart-style)
 class Wishlist {
@@ -1641,14 +1629,14 @@ class Wishlist {
         
         if (this.wishlist.length === 0) {
             wishlistItemsContainer.style.display = 'none';
-            wishlistSummary.style.display = 'none';
-            emptyWishlistMessage.style.display = 'block';
+            if (wishlistSummary) wishlistSummary.style.display = 'none';
+            if (emptyWishlistMessage) emptyWishlistMessage.style.display = 'block';
             return;
         }
         
         wishlistItemsContainer.style.display = 'block';
-        wishlistSummary.style.display = 'block';
-        emptyWishlistMessage.style.display = 'none';
+        if (wishlistSummary) wishlistSummary.style.display = 'block';
+        if (emptyWishlistMessage) emptyWishlistMessage.style.display = 'none';
         
         wishlistItemsContainer.innerHTML = '';
         
@@ -1676,7 +1664,10 @@ class Wishlist {
         });
         
         // Update total items count
-        document.getElementById('wishlist-total-items').textContent = this.wishlist.length;
+        const totalItemsElement = document.getElementById('wishlist-total-items');
+        if (totalItemsElement) {
+            totalItemsElement.textContent = this.wishlist.length;
+        }
         
         // Add event listeners for wishlist item controls
         this.setupWishlistItemEvents();
@@ -1701,39 +1692,6 @@ class Wishlist {
         });
     }
 }
-
-// Initialize wishlist when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    window.sareeWishlist = new Wishlist();
-    
-    // Your existing initialization code
-    initializeWebsite();
-});
-
-
-// Demo Banner Close Functionality
-function initializeDemoBanner() {
-    const demoBanner = document.querySelector('.demo-banner');
-    const closeBtn = document.getElementById('demo-close');
-    
-    if (closeBtn && demoBanner) {
-        closeBtn.addEventListener('click', function() {
-            demoBanner.style.display = 'none';
-            // Adjust other elements after banner is closed
-            document.querySelector('.navbar').style.top = '0';
-            document.querySelector('.page-header').style.marginTop = '70px';
-            document.querySelector('.hero').style.marginTop = '70px';
-        });
-    }
-}
-
-// Call this in your DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-    initializeDemoBanner();
-    // ... your other initialization code
-});
-
-
 
 // Search Functionality
 class Search {
@@ -1810,31 +1768,37 @@ class Search {
 
         // Close with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.searchPopup.classList.contains('active')) {
+            if (e.key === 'Escape' && this.searchPopup && this.searchPopup.classList.contains('active')) {
                 this.closeSearch();
             }
         });
     }
 
     toggleSearch() {
-        this.searchPopup.classList.toggle('active');
-        this.searchToggle.classList.toggle('active');
-        
-        if (this.searchPopup.classList.contains('active')) {
-            this.searchInput.focus();
-            // Clear previous results
-            this.searchResults.innerHTML = '';
+        if (this.searchPopup && this.searchToggle) {
+            this.searchPopup.classList.toggle('active');
+            this.searchToggle.classList.toggle('active');
+            
+            if (this.searchPopup.classList.contains('active')) {
+                if (this.searchInput) this.searchInput.focus();
+                // Clear previous results
+                if (this.searchResults) this.searchResults.innerHTML = '';
+            }
         }
     }
 
     closeSearch() {
-        this.searchPopup.classList.remove('active');
-        this.searchToggle.classList.remove('active');
-        this.searchInput.value = '';
-        this.searchResults.innerHTML = '';
+        if (this.searchPopup && this.searchToggle) {
+            this.searchPopup.classList.remove('active');
+            this.searchToggle.classList.remove('active');
+            if (this.searchInput) this.searchInput.value = '';
+            if (this.searchResults) this.searchResults.innerHTML = '';
+        }
     }
 
     handleSearch(query) {
+        if (!this.searchResults) return;
+        
         if (query.length < 2) {
             this.searchResults.innerHTML = '';
             return;
@@ -1845,6 +1809,8 @@ class Search {
     }
 
     performSearch(query) {
+        if (!this.searchResults) return;
+        
         if (query.trim() === '') return;
 
         const results = this.searchProducts(query);
@@ -1878,6 +1844,8 @@ class Search {
     }
 
     displayResults(results) {
+        if (!this.searchResults) return;
+        
         if (results.length === 0) {
             this.searchResults.innerHTML = `
                 <div class="no-results">
@@ -1927,116 +1895,20 @@ class Search {
     }
 }
 
-// Initialize search when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    window.sareeSearch = new Search();
-    
-    // Your existing initialization code
-    initializeWebsite();
-});
-
-// Mobile Navigation Functionality
-class MobileNavigation {
-    constructor() {
-        this.hamburger = document.getElementById('hamburger');
-        this.navMenu = document.getElementById('nav-menu');
-        this.navLinks = document.querySelectorAll('.nav-link');
-        this.navIcons = document.querySelectorAll('.nav-icon');
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
         
-        this.init();
-    }
-
-    init() {
-        this.setupEventListeners();
-    }
-
-    setupEventListeners() {
-        // Hamburger click
-        if (this.hamburger) {
-            this.hamburger.addEventListener('click', () => {
-                this.toggleMenu();
-            });
-        }
-
-        // Close menu when clicking on links
-        this.navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                this.closeMenu();
-            });
-        });
-
-        // Close menu when clicking on icons (except search)
-        this.navIcons.forEach(icon => {
-            if (!icon.classList.contains('search-icon')) {
-                icon.addEventListener('click', () => {
-                    this.closeMenu();
-                });
-            }
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (this.navMenu.classList.contains('active') && 
-                !this.navMenu.contains(e.target) && 
-                !this.hamburger.contains(e.target)) {
-                this.closeMenu();
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
-                this.closeMenu();
-            }
-        });
-
-        // Close menu on window resize (if resizing to larger screen)
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 768) {
-                this.closeMenu();
-            }
-        });
-    }
-
-    toggleMenu() {
-        this.hamburger.classList.toggle('active');
-        this.navMenu.classList.toggle('active');
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
         
-        // Prevent body scroll when menu is open
-        if (this.navMenu.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    }
-
-    closeMenu() {
-        this.hamburger.classList.remove('active');
-        this.navMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    openMenu() {
-        this.hamburger.classList.add('active');
-        this.navMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Update your existing navigation initialization
-function initializeNavigation() {
-    // Initialize mobile navigation
-    window.mobileNav = new MobileNavigation();
-    
-    // Your existing sticky navigation code
-    window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
         }
     });
-}
+});
